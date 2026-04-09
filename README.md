@@ -1,6 +1,7 @@
 # auto_prenoto
 
 **Step 1: Installare Chrome, Python, e pip (per installare i package di python)**  
+ - Scaricare Chrome: [link](https://www.google.it/intl/it/chrome/?brand=OZZY&ds_kid=310967345756&gclsrc=aw.ds&gad_source=1&gad_campaignid=22942503538&gbraid=0AAAAAoY3CA6KfGV2tNVkpq9SYoIhkkYMj&gclid=EAIaIQobChMI8-KmqODhkwMVS52DBx2AcQyMEAAYASAAEgKwWvD_BwE)
  - Scaricare Python: https://www.python.org/downloads/  
  - Adesso puoi entrare in un environment python in Terminal (Mac/Linux) o CommandPrompt (Windows) con il comando:
  
