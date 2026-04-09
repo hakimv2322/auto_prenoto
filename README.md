@@ -27,7 +27,7 @@ Questo step è facoltativo, se vuoi le notifiche inviate alla tua e-mail. Le e-m
  - Puoi testare questa funzionalità settando "test_email_sending" come "True", che manderà una mail ogni 5 secondi.
 
 **Step 4: Scaricare lo script auto_prenoto.py e settare gli input.**  
-Scaricare sul tuo dispositivo, per esempio in "Documents". Scegli tutti gli input che vuoi, inserendo qui la "app password" di Step 3 (no spazi).
+Scaricare sul tuo dispositivo, per esempio in "Documents". Scegli tutti gli input che vuoi, inserendo qui la "app password" di Step 3 (no spazi). Se non vuoi le notifiche e-mail, puoi settare "emails_desired" come "False".
 
 **Step 5: Run.**
  - In Terminal, navigare alla cartella in cui hai messo auto_prenoto.py. (Puoi navigare con il comando "cd".) Avviare lo script con:
