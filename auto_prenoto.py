@@ -38,7 +38,7 @@ slot_preferences = [3, 1, 2, 4, 5]
 ############################# End INPUTS #############################
 
 
-def email_error_msg(error=""):
+def email_error_msg():
 	try:
 		msg = MIMEMultipart()
 		msg['From'] = sender_email
@@ -53,7 +53,6 @@ def email_error_msg(error=""):
 		    server.login(sender_email, app_pw)
 		    server.sendmail(sender_email, recipient_email, msg.as_string())
 		print("Email message sent on: ", dt.datetime.now())
-		print(f"{error}")
 	except Exception as err:
 		print(f"An error occurred in email sending: {err}")
 
@@ -92,8 +91,9 @@ def job():
 		driver.close()
 		print("Form was filled correctly on: ", dt.datetime.now())
 	except Exception as err:
+		print(f"{err}")
 		if emails_desired:
-			email_error_msg(err)
+			email_error_msg()
 
 
 if test_email_sending:
