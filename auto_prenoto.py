@@ -28,7 +28,11 @@ send_wednesday = True
 send_thursday  = True
 send_friday    = True
 
-send_time = "07:0"+str(rn.randint(0,9))
+mo_send_time = "07:0"+str(rn.randint(0,9))
+tu_send_time = "07:0"+str(rn.randint(0,9))
+we_send_time = "07:0"+str(rn.randint(0,9))
+th_send_time = "07:0"+str(rn.randint(0,9))
+fr_send_time = "07:0"+str(rn.randint(0,9))
 send_timezone = "Europe/Rome"
 
 # Select slot time ordering, in order of preference.
@@ -99,15 +103,15 @@ def job():
 if test_email_sending:
 	schedule.every(5).seconds.do(job)
 if send_monday:
-	schedule.every().monday.at(send_time, timezone(send_timezone)).do(job)
+	schedule.every().monday.at(mo_send_time, timezone(send_timezone)).do(job)
 if send_tuesday:
-	schedule.every().tuesday.at(send_time, timezone(send_timezone)).do(job)
+	schedule.every().tuesday.at(tu_send_time, timezone(send_timezone)).do(job)
 if send_wednesday:
-	schedule.every().wednesday.at(send_time, timezone(send_timezone)).do(job)
+	schedule.every().wednesday.at(we_send_time, timezone(send_timezone)).do(job)
 if send_thursday:
-	schedule.every().thursday.at(send_time, timezone(send_timezone)).do(job)
+	schedule.every().thursday.at(th_send_time, timezone(send_timezone)).do(job)
 if send_friday:
-	schedule.every().friday.at(send_time, timezone(send_timezone)).do(job)
+	schedule.every().friday.at(fr_send_time, timezone(send_timezone)).do(job)
 
 
 while True:
