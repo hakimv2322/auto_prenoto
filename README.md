@@ -1,6 +1,6 @@
 # auto_prenoto
 
-**Step 1: Installare Python e pip (per installare i package di python)**  
+**Step 1: Installare Chrome, Python, e pip (per installare i package di python)**  
  - Scaricare Python: https://www.python.org/downloads/  
  - Adesso puoi entrare in un environment python in Terminal (Mac/Linux) o CommandPrompt (Windows) con il comando:
  
