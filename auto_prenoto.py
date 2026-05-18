@@ -68,7 +68,7 @@ def job():
 		driver = webdriver.Chrome()
 		driver.get("https://eu.jotform.com/app/213344089067357?utm_source=jotform_pwa")
 		time.sleep(20)
-		iframe = driver.find_element(By.XPATH, '//*[@id="213342187764358"]/div[2]/iframe')
+		iframe = driver.find_element(By.XPATH, '//*[@id="213342187764358"]/div/div[2]/iframe')
 		driver.switch_to.frame(iframe)
 		name1 = driver.find_element(By.NAME, "q25_nameSurname[first]")
 		name1.clear()
@@ -84,9 +84,9 @@ def job():
 		driver.find_element(By.ID, "label_input_38_0").click()  # I will be at ARG and ...
 		time.sleep(5)
 		for ii in slot_preferences:
-			driver.find_element(By.XPATH, '/html/body/form/div[2]/ul/li[18]/div/div/div/div/div/div[2]/div[2]/div/div['+str(ii)+']').click()
+			driver.find_element(By.XPATH, '/html/body/form/div[2]/ul/li[18]/div/div/div/div/div/div[2]/fieldset/div/label['+str(ii)+']').click()
 			time.sleep(1)
-			driver.find_element(By.XPATH, '/html/body/form/div[2]/ul/li[25]/div/div[1]/button[2]').click()  # Send Form
+			driver.find_element(By.ID, 'input_1').click()  # Send Form
 			time.sleep(3)
 			if not ("Fill your daily certification" in driver.page_source):
 				break
