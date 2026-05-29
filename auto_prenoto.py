@@ -35,9 +35,12 @@ th_send_time = "07:0"+str(rn.randint(0,9))
 fr_send_time = "07:0"+str(rn.randint(0,9))
 send_timezone = "Europe/Rome"
 
-# Select slot time ordering, in order of preference.
-# 1=12:00, 2=12:30, 3=13:00, 4=13:30, 5=14:00
-slot_preferences = [3, 1, 2, 4, 5]
+# Select slot time ordering, in order of preference, for each day.
+slot_preferences_mo = ["13:00", "12:30", "12:00", "13:30", "14:00"]
+slot_preferences_tu = ["13:00", "12:30", "12:00", "13:30", "14:00"]
+slot_preferences_we = ["13:00", "12:30", "12:00", "13:30", "14:00"]
+slot_preferences_th = ["13:00", "12:30", "12:00", "13:30", "14:00"]
+slot_preferences_fr = ["13:00", "12:30", "12:00", "13:30", "14:00"]
 
 ############################# End INPUTS #############################
 
@@ -60,7 +63,7 @@ def email_error_msg():
 	except Exception as err:
 		print(f"An error occurred in email sending: {err}")
 
-def job():
+def job(slot_preferences):
 	if test_email_sending:
 		email_error_msg()
 		return
@@ -84,13 +87,20 @@ def job():
 		driver.find_element(By.ID, "label_input_38_0").click()  # I will be at ARG and ...
 		time.sleep(5)
 		for ii in slot_preferences:
-			driver.find_element(By.XPATH, '/html/body/form/div[2]/ul/li[18]/div/div/div/div/div/div[2]/fieldset/div/label['+str(ii)+']').click()
-			time.sleep(1)
-			driver.find_element(By.ID, 'input_1').click()  # Send Form
-			time.sleep(3)
+			for jj in range(1,10):
+				try:
+					button = driver.find_element(By.XPATH, '/html/body/form/div[2]/ul/li[18]/div/div/div/div/div/div[2]/fieldset/div/label['+str(jj)+']')
+				except:
+					break
+				if ii in button.text:
+					button.click()
+					time.sleep(1)
+					driver.find_element(By.ID, 'input_1').click()  # Send Form
+					time.sleep(3)
+					break
 			if not ("Fill your daily certification" in driver.page_source):
 				break
-			if ii == len(slot_preferences):
+			if ii == slot_preferences[-1]:
 				assert False, "Failure: all given time slots were attempted; none were successful..."
 		driver.close()
 		print("Form was filled correctly on: ", dt.datetime.now())
@@ -103,15 +113,15 @@ def job():
 if test_email_sending:
 	schedule.every(5).seconds.do(job)
 if send_monday:
-	schedule.every().monday.at(mo_send_time, timezone(send_timezone)).do(job)
+	schedule.every().monday.at(mo_send_time, timezone(send_timezone)).do(job, slot_preferences_mo)
 if send_tuesday:
-	schedule.every().tuesday.at(tu_send_time, timezone(send_timezone)).do(job)
+	schedule.every().tuesday.at(tu_send_time, timezone(send_timezone)).do(job, slot_preferences_tu)
 if send_wednesday:
-	schedule.every().wednesday.at(we_send_time, timezone(send_timezone)).do(job)
+	schedule.every().wednesday.at(we_send_time, timezone(send_timezone)).do(job, slot_preferences_we)
 if send_thursday:
-	schedule.every().thursday.at(th_send_time, timezone(send_timezone)).do(job)
+	schedule.every().thursday.at(th_send_time, timezone(send_timezone)).do(job, slot_preferences_th)
 if send_friday:
-	schedule.every().friday.at(fr_send_time, timezone(send_timezone)).do(job)
+	schedule.every().friday.at(fr_send_time, timezone(send_timezone)).do(job, slot_preferences_fr)
 
 
 while True:
